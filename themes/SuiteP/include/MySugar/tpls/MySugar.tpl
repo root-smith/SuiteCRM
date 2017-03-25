@@ -65,7 +65,7 @@
 
 {$chartResources}
 {$mySugarChartResources}
-<div class="dashboard">
+<div>
     {*display tabs*}
     <ul class="nav nav-tabs nav-dashboard">
 

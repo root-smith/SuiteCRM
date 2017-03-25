@@ -46,7 +46,7 @@ function copy_recursive( $source, $dest ){
     if( is_file( $source ) ){
         return( copy( $source, $dest ) );
     }
-    if( !is_dir($dest) ){
+    if( !sugar_is_dir($dest, 'instance') ){
         sugar_mkdir( $dest );
     }
 
@@ -68,10 +68,10 @@ function copy_recursive( $source, $dest ){
 
 function mkdir_recursive($path, $check_is_parent_dir = false)
 {
-	if(is_dir($path)) {
+	if(sugar_is_dir($path, 'instance')) {
 		return(true);
 	}
-	if(is_file($path)) {
+	if(sugar_is_file($path, 'instance')) {
 	    if(!empty($GLOBALS['log'])) {
 		    $GLOBALS['log']->fatal("ERROR: mkdir_recursive(): argument $path is already a file.");
 	    }

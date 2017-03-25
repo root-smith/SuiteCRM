@@ -45,22 +45,11 @@
 	    $("ul.clickMenu").each(function(index, node){
 	        $(node).sugarActionMenu();
 	    });
-
-        if($('.edit-view-pagination').children().length == 0) $('.saveAndContinue').remove();
     });
     {/literal}
 </script>
 <div class="clear"></div>
 <form action="index.php" method="POST" name="{$form_name}" id="{$form_id}" {$enctype}>
-
-    <div class="edit-view-pagination-mobile-container">
-        <div class="edit-view-pagination edit-view-mobile-pagination">
-            {{if $SHOW_VCR_CONTROL}}
-            {$PAGINATION}
-            {{/if}}
-        </div>
-    </div>
-
 <table width="100%" cellpadding="0" cellspacing="0" border="0" class="dcQuickEdit">
 <tr>
 <td class="buttons">
@@ -90,18 +79,17 @@
 {{$field}}   
 {{/foreach}}
 {{/if}}
+
 {{include file='themes/SuiteP/include/EditView/actions_buttons.tpl'}}
 
 </td>
-<td align='right' class="edit-view-pagination-desktop-container">
+<td align='right'>
 {{$ADMIN_EDIT}}
 {{if $panelCount == 0}}
     {{* Render tag for VCR control if SHOW_VCR_CONTROL is true *}}
-	<div class="edit-view-pagination edit-view-pagination-desktop">
-        {{if $SHOW_VCR_CONTROL}}
-        {$PAGINATION}
-        {{/if}}
-    </div>
+	{{if $SHOW_VCR_CONTROL}}
+		{$PAGINATION}
+	{{/if}}
 {{/if}}
 </td>
 </tr>

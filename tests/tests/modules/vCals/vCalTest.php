@@ -151,6 +151,7 @@ class vCalTest extends PHPUnit_Framework_TestCase
 
     public function testfold_ical_lines()
     {
+
         //test with short strings
         $result = vCal::fold_ical_lines('testkey', 'testvalue');
         $this->assertEquals('testkey:testvalue', $result);
@@ -158,7 +159,7 @@ class vCalTest extends PHPUnit_Framework_TestCase
         //test with longer strings
         $expected = "testkey11111111111111111111111111111111111111111111111111111111111111111111\r\n	11111111111111111111111111111111:testvalue11111111111111111111111111111111\r\n	11111111111111111111111111111111111111111111111111111111111111111111";
         $result = vCal::fold_ical_lines('testkey'.str_repeat('1', 100), 'testvalue'.str_repeat('1', 100));
-        $this->assertEquals($expected, $result);
+        $this->assertEquals();
     }
 
     public function testcreate_ical_array_from_string()

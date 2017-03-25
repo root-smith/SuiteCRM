@@ -58,40 +58,20 @@
             <a id="tab{{$tabCount}}" data-toggle="tab" class="hidden-xs">
                 {sugar_translate label='{{$label}}' module='{{$module}}'}
             </a>
-            {* Count Tabs *}
-            {{counter name="tabCountOnlyXS" start=-1 print=false assign="tabCountOnlyXS"}}
-            {{foreach name=sectionOnlyXS from=$sectionPanels key=labelOnly item=panelOnlyXS}}
-            {{capture name=label_upper_count_only assign=label_upper_count_only}}{{$labelOnly|upper}}{{/capture}}
-            {{if (isset($tabDefs[$label_upper_count_only].newTab) && $tabDefs[$label_upper_count_only].newTab == true)}}
-                {{counter name="tabCountOnlyXS" print=false}}
-            {{/if}}
-            {{/foreach}}
-
-            {*
-                For the mobile view, only show the first tab has a drop down when:
-                * There is more than one tab set
-                * When Acton Menu's are enabled
-            *}
-            <!-- Counting Tabs {{$tabCountOnlyXS}}-->
-            <a id="xstab{{$tabCount}}" href="#" class="visible-xs first-tab{{if $tabCountOnlyXS > 0}}-xs{{/if}} dropdown-toggle" data-toggle="dropdown">
+            <a id="xstab{{$tabCount}}" href="#" class="visible-xs first-tab-xs dropdown-toggle" data-toggle="dropdown">
                 {sugar_translate label='{{$label}}' module='{{$module}}'}
             </a>
-            {{if $tabCountOnlyXS > 0}}
             <ul id="first-tab-menu-xs" class="dropdown-menu">
-                {{counter name="tabCountXS" start=0 print=false assign="tabCountXS"}}
+                {{counter name="tabCountXS" start=-1 print=false assign="tabCountXS"}}
                 {{foreach name=sectionXS from=$sectionPanels key=label item=panelXS}}
-                {{capture name=label_upper_xs assign=label_upper_xs}}{{$label|upper}}{{/capture}}
-                {{if (isset($tabDefs[$label_upper_xs].newTab) && $tabDefs[$label_upper_xs].newTab == true)}}
+                {{counter name="tabCountXS" print=false}}
                 <li role="presentation">
-                    <a id="tab{{$tabCountXS}}" data-toggle="tab" onclick="changeFirstTab(this, 'tab-content-{{$tabCountXS}}');">
+                    <a id="tab{{$tabCountXS}}"  data-toggle="tab" onclick="changeFirstTab(this, 'tab-content-{{$tabCountXS}}');">
                         {sugar_translate label='{{$label}}' module='{{$module}}'}
                     </a>
                 </li>
-                {{counter name="tabCountXS" print=false}}
-                {{/if}}
                 {{/foreach}}
             </ul>
-            {{/if}}
         </li>
         {{else}}
         <li role="presentation" class="hidden-xs">
@@ -114,26 +94,26 @@
         {{else}}
         <div class="tab-content" style="padding: 0; border: 0;">
             {{/if}}
-            {{counter name="tabCount" start=0 print=false assign="tabCount"}}
             {* Loop through all top level panels first *}
+            {{counter name="tabCount" start=0 print=false assign="tabCount"}}
             {{if $useTabs}}
             {{foreach name=section from=$sectionPanels key=label item=panel}}
             {{capture name=label_upper assign=label_upper}}{{$label|upper}}{{/capture}}
             {{if isset($tabDefs[$label_upper].newTab) && $tabDefs[$label_upper].newTab == true}}
             {{if $tabCount == '0'}}
-            <div class="tab-pane-NOBOOTSTRAPTOGGLER active fade in" id='tab-content-{{$tabCount}}'>
+            <div class="tab-pane-NOBOOTSTRAPTOGGLER active fade in" id='detailpanel_{{$tabCount}}' style="display: block;">
                 {{include file='themes/SuiteP/include/EditView/tab_panel_content.tpl'}}
             </div>
             {{else}}
-            <div class="tab-pane-NOBOOTSTRAPTOGGLER fade" id='tab-content-{{$tabCount}}'>
+            <div class="tab-pane-NOBOOTSTRAPTOGGLER fade active in" id='detailpanel_{{$tabCount}}' style="display: none;">
                 {{include file='themes/SuiteP/include/EditView/tab_panel_content.tpl'}}
             </div>
             {{/if}}
-             {{counter name="tabCount" print=false}}
             {{/if}}
+            {{counter name="tabCount" print=false}}
             {{/foreach}}
             {{else}}
-            <div class="tab-pane panel-collapse">&nbsp;</div>
+            <div class="tab-pane panel-collapse">test</div>
             {{/if}}
         </div>
         {*display panels*}
@@ -163,7 +143,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading {{$panelHeadingCollapse}}">
-                    <a class="{{$collapsed}}" role="button" data-toggle="collapse-edit" aria-expanded="false">
+                    <a class="{{$collapsed}}" role="button" data-toggle="collapse" aria-expanded="false">
                         <div class="col-xs-10 col-sm-11 col-md-11">
                             {sugar_translate label='{{$label}}' module='{{$module}}'}
                         </div>
@@ -235,26 +215,33 @@ $(document).ready(function() {ldelim}
 
 
     $(function(){
-        $('#EditView_tabs ul.nav.nav-tabs li > a[data-toggle="tab"]').click(function(e){
-            if(typeof $(this).parent().find('a').first().attr('id') != 'undefined') {
-                var tab = parseInt($(this).parent().find('a').first().attr('id').match(/^tab(.)*$/)[1]);
+        $('#EditView_tabs ul.nav.nav-tabs li').click(function(e){
+            if(typeof $(this).find('a').first().attr('id') != 'undefined') {
+                var tab = parseInt($(this).find('a').first().attr('id').match(/^tab(.)*$/)[1]);
                 selectTab(tab);
             }
         });
 
-        $('a[data-toggle="collapse-edit"]').click(function(e){
+        $('a[data-toggle="collapse"]').click(function(e){
+            var content;
             if($(this).hasClass('collapsed')) {
-              // Expand panel
-                // Change style of .panel-header
                 $(this).removeClass('collapsed');
-                // Expand .panel-body
-                $(this).parents('.panel').find('.panel-body').removeClass('in').addClass('in');
+                if($(this).closest('.panel-content').length) {
+                    content = $(this).closest('.panel-content').find('.panel-body.panel-collapse.collapse');
+                }
+                else if($(this).closest('.panel.panel-default').length){
+                    content = $(this).closest('.panel.panel-default').next();
+                }
+                content.addClass('in');
             } else {
-              // Collapse panel
-                // Change style of .panel-header
                 $(this).addClass('collapsed');
-                // Collapse .panel-body
-                $(this).parents('.panel').find('.panel-body').removeClass('in').removeClass('in');
+                if($(this).closest('.panel-content').length) {
+                    content = $(this).closest('.panel-content').find('.panel-body.panel-collapse.collapse');
+                }
+                else if($(this).closest('.panel.panel-default').length){
+                    content = $(this).closest('.panel.panel-default').next();
+                }
+                content.removeClass('in');
             }
         });
     });

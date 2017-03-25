@@ -59,7 +59,7 @@
 		<div id="wiz_message"></div>
 
 
-		<div id=wizard class="wizard-unique-elem">
+		<div id=wizard>
 
 
 			<div id='step1' >

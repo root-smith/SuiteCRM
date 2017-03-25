@@ -1163,7 +1163,7 @@ SugarWidgetScheduleRow.prototype.add_freebusy_nodes = function(tr, attendee) {
 		if(is_loaded) {
 			// if there's a freebusy stack in this slice
 			if(	typeof(GLOBAL_REGISTRY['freebusy_adjusted'][this.focus_bean.fields.id][this.timeslots[i].hash]) != 'undefined') {
-				$(td).addClass('free');
+				td.style.backgroundColor="#4D5EAA";
 
                 var dataid = '',
                     module = '';
@@ -1183,7 +1183,7 @@ SugarWidgetScheduleRow.prototype.add_freebusy_nodes = function(tr, attendee) {
                 $(td).attr('data-module', module);
 
                 if((dataid.split(',').length) > 1) {
-									$(td).addClass('busy');
+                    td.style.backgroundColor="#AA4D4D";
                 }
 			}
 		}
@@ -1193,7 +1193,7 @@ SugarWidgetScheduleRow.prototype.add_freebusy_nodes = function(tr, attendee) {
                     // On hover in
                     var domElement = $(this);
                     // Only add hover logic to the fields that need it.
-                    if($(domElement).hasClass('free') || domElement.hasClass('schedulerSlotCellStartTime')) {
+                    if(domElement.css( "background-color" ) || domElement.hasClass('schedulerSlotCellStartTime')) {
                         //
                         // If the id is in the td:
                         if (domElement.attr('data-id') != null) {
