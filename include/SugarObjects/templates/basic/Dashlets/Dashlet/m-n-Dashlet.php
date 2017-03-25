@@ -1,11 +1,11 @@
 <?php
-/**
- *
+if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+/*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
- *
- * SuiteCRM is an extension to SugarCRM Community Edition developed by SalesAgility Ltd.
- * Copyright (C) 2011 - 2017 SalesAgility Ltd.
+
+ * SuiteCRM is an extension to SugarCRM Community Edition developed by Salesagility Ltd.
+ * Copyright (C) 2011 - 2014 Salesagility Ltd.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Affero General Public License version 3 as published by the
@@ -36,26 +36,27 @@
  * SugarCRM" logo and "Supercharged by SuiteCRM" logo. If the display of the logos is not
  * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
- */
+ ********************************************************************************/
 
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
+/*********************************************************************************
+
+ * Description:  Defines the English language pack for the base application.
+ * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
+ * All Rights Reserved.
+ * Contributor(s): ______________________________________..
+ ********************************************************************************/
 
 require_once('include/Dashlets/DashletGeneric.php');
 require_once('modules/<module_name>/<object_name>.php');
 
-class <module_name > Dashlet extends DashletGeneric {
-    function __construct($id, $def = null)
-    {
-        global $current_user, $app_strings;
-        require('modules/<module_name>/metadata/dashletviewdefs.php');
+class <module_name>Dashlet extends DashletGeneric { 
+    function __construct($id, $def = null) {
+		global $current_user, $app_strings;
+		require('modules/<module_name>/metadata/dashletviewdefs.php');
 
         parent::__construct($id, $def);
 
-        if (empty($def['title'])) {
-            $this->title = translate('LBL_HOMEPAGE_TITLE', '<module_name>');
-        }
+        if(empty($def['title'])) $this->title = translate('LBL_HOMEPAGE_TITLE', '<module_name>');
 
         $this->searchFields = $dashletData['<module_name>Dashlet']['searchFields'];
         $this->columns = $dashletData['<module_name>Dashlet']['columns'];
