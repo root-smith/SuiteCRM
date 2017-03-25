@@ -1,11 +1,11 @@
 <?php
-/**
- *
+if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+/*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
- *
- * SuiteCRM is an extension to SugarCRM Community Edition developed by SalesAgility Ltd.
- * Copyright (C) 2011 - 2017 SalesAgility Ltd.
+
+ * SuiteCRM is an extension to SugarCRM Community Edition developed by Salesagility Ltd.
+ * Copyright (C) 2011 - 2014 Salesagility Ltd.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Affero General Public License version 3 as published by the
@@ -36,63 +36,68 @@
  * SugarCRM" logo and "Supercharged by SuiteCRM" logo. If the display of the logos is not
  * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
- */
+ ********************************************************************************/
 
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
+/*********************************************************************************
+
+ * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
+ * All Rights Reserved.
+ * Contributor(s): ______________________________________..
+ ********************************************************************************/
 
 $module_name = '<module_name>';
 $_object_name = '<_object_name>';
 $viewdefs[$module_name]['DetailView'] = array(
-    'templateMeta' => array(
-        'maxColumns' => '2',
-        'form' => array(),
-        'widths' => array(
-            array('label' => '10', 'field' => '30'),
-            array('label' => '10', 'field' => '30')
-        ),
+'templateMeta' => array('maxColumns' => '2',
+                        'form' => array(),
+                        'widths' => array(
+                                        array('label' => '10', 'field' => '30'),
+                                        array('label' => '10', 'field' => '30')
+                                        ),
+                        ),
+'panels' =>array (
+
+  array (
+
+    array (
+      'name' => 'document_name',
+      'label' => 'LBL_DOC_NAME',
     ),
-    'panels' => array(
+     array (
+      'name' => 'uploadfile',
+      'displayParams' => array('link'=>'uploadfile', 'id'=>'id'),
+    ),
 
-        array(
 
-            array(
-                'name' => 'document_name',
-                'label' => 'LBL_DOC_NAME',
-            ),
-            array(
-                'name' => 'uploadfile',
-                'displayParams' => array('link' => 'uploadfile', 'id' => 'id'),
-            ),
+  ),
+  array (
+      'category_id',
+      'subcategory_id',
+  ),
 
-        ),
-        array(
-            'category_id',
-            'subcategory_id',
-        ),
+  array (
 
-        array(
+	  'status',
 
-            'status',
+  ),
+  array (
+      'active_date',
+      'exp_date',
+  ),
 
-        ),
-        array(
-            'active_date',
-            'exp_date',
-        ),
+  array (
+    array('name'=>'assigned_user_name', 'label'=>'LBL_ASSIGNED_TO'),
+  ),
 
-        array(
-            array('name' => 'assigned_user_name', 'label' => 'LBL_ASSIGNED_TO'),
-        ),
+  array (
 
-        array(
+    array (
+      'name' => 'description',
+      'label' => 'LBL_DOC_DESCRIPTION',
+    ),
+  ),
 
-            array(
-                'name' => 'description',
-                'label' => 'LBL_DOC_DESCRIPTION',
-            ),
-        ),
-
-    )
+)
 );
+
+?>

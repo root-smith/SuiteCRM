@@ -62,11 +62,7 @@ if(!empty($_REQUEST['mail_smtppass'])) {
     $pass = $_REQUEST['mail_smtppass'];
 } elseif(isset($_REQUEST['mail_type'])) {
     $oe = new OutboundEmail();
-    if(is_admin($current_user) && $_REQUEST['mail_type'] == 'system') {
-        $oe = $oe->getSystemMailerSettings();
-    } else {
-        $oe = $oe->getMailerByName($current_user, $_REQUEST['mail_type']);
-    }
+    $oe = $oe->getMailerByName($current_user, $_REQUEST['mail_type']);
     if(!empty($oe)) {
         $pass = $oe->mail_smtppass;
     }

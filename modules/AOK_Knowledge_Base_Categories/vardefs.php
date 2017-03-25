@@ -1,10 +1,10 @@
 <?php
-/**
+/*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
- *
- * SuiteCRM is an extension to SugarCRM Community Edition developed by SalesAgility Ltd.
- * Copyright (C) 2011 - 2016 SalesAgility Ltd.
+
+ * SuiteCRM is an extension to SugarCRM Community Edition developed by Salesagility Ltd.
+ * Copyright (C) 2011 - 2014 Salesagility Ltd.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Affero General Public License version 3 as published by the
@@ -35,37 +35,32 @@
  * SugarCRM" logo and "Supercharged by SuiteCRM" logo. If the display of the logos is not
  * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
- */
-
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
+ ********************************************************************************/
 
 $dictionary['AOK_Knowledge_Base_Categories'] = array(
-    'table' => 'aok_knowledge_base_categories',
-    'audited' => true,
-    'duplicate_merge' => true,
-    'fields' => array(
-        'aok_knowledgebase_categories' => array(
-            'name' => 'aok_knowledgebase_categories',
-            'type' => 'link',
-            'relationship' => 'aok_knowledgebase_categories',
-            'source' => 'non-db',
-            'module' => 'AOK_KnowledgeBase',
-            'bean_name' => false,
-            'vname' => 'LBL_AOK_KB_TITLE',
-        ),
-    ),
-    'relationships' => array(),
-    'optimistic_locking' => true,
-    'unified_search' => true,
+	'table'=>'aok_knowledge_base_categories',
+	'audited'=>true,
+		'duplicate_merge'=>true,
+		'fields'=>array (
+),
+	'relationships'=>array (
+),
+	'optimistic_locking'=>true,
+		'unified_search'=>true,
+	);
+
+// created: 2015-03-04 12:01:39
+$dictionary["AOK_Knowledge_Base_Categories"]["fields"]["aok_knowledgebase_categories"] = array (
+	'name' => 'aok_knowledgebase_categories',
+	'type' => 'link',
+	'relationship' => 'aok_knowledgebase_categories',
+	'source' => 'non-db',
+	'module' => 'AOK_KnowledgeBase',
+	'bean_name' => false,
+	'vname' => 'LBL_AOK_KB_TITLE',
 );
 
-if (!class_exists('VardefManager')) {
-    require_once('include/SugarObjects/VardefManager.php');
+if (!class_exists('VardefManager')){
+        require_once('include/SugarObjects/VardefManager.php');
 }
-VardefManager::createVardef(
-    'AOK_Knowledge_Base_Categories',
-    'AOK_Knowledge_Base_Categories',
-    array('basic', 'assignable')
-);
+VardefManager::createVardef('AOK_Knowledge_Base_Categories','AOK_Knowledge_Base_Categories', array('basic','assignable'));

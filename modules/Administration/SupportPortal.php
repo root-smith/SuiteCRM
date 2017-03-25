@@ -93,7 +93,7 @@ switch ($_REQUEST['view']) {
                 $send_module = 'Prospects';                            
 		// FG - Bug 39819 - Check for custom help files
 		$helpPath = 'modules/'.$send_module.'/language/'.$send_lang.'.help.'.$send_action.'.html';
-		if (is_file("custom/" . $helpPath)) {
+		if (sugar_is_file("custom/" . $helpPath)) {
 		    $helpPath = 'custom/' . $helpPath;
 		}
 		$sugar_smarty = new Sugar_Smarty();

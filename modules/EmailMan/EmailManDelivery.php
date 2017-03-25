@@ -222,7 +222,7 @@ do {
             $outboundEmailAccount = BeanFactory::getBean('OutboundEmailAccounts',
                 $current_emailmarketing->outbound_email_id);
 
-            if (strtolower($outboundEmailAccount->mail_sendtype) == "smtp") {
+            if ($outboundEmailAccount->mail_sendtype == "smtp") {
                 $mail->Mailer = "smtp";
                 $mail->Host = $outboundEmailAccount->mail_smtpserver;
                 $mail->Port = $outboundEmailAccount->mail_smtpport;
